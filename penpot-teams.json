@@ -1,0 +1,28 @@
+[
+  {
+    "features": [
+      "fdata/path-data",
+      "plugins/runtime",
+      "design-tokens/v1",
+      "variants/v1",
+      "layout/grid",
+      "styles/v2",
+      "fdata/objects-map",
+      "tokens/numeric-input",
+      "render-wasm/v1",
+      "components/v2",
+      "fdata/shape-data-type"
+    ],
+    "permissions": {
+      "type": "membership",
+      "isOwner": true,
+      "isAdmin": true,
+      "canEdit": true
+    },
+    "name": "Default",
+    "modifiedAt": "2026-10-24T03:33:22.561933Z",
+    "id": "5a61df07-99ff-814c-8008-d642317f5ba4",
+    "createdAt": "2026-10-24T03:33:22.561933Z",
+    "isDefault": true
+  }
+]

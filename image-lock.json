@@ -1,0 +1,92 @@
+[
+  {
+    "Id": "sha256:bb79dc86267c557fd11e7feb0cd9dd506dd02e991ecdd6cae11ca7d7e5d36fc3",
+    "RepoTags": [
+      "gitlab/gitlab-ce:19.5.1-ce.0"
+    ],
+    "RepoDigests": [
+      "gitlab/gitlab-ce@sha256:bb79dc86267c557fd11e7feb0cd9dd506dd02e991ecdd6cae11ca7d7e5d36fc3"
+    ]
+  },
+  {
+    "Id": "sha256:f1c76f915d7f70d8b3e25cac58da3d87d3d10106dda82ee780409440e1dc1ccc",
+    "RepoTags": [
+      "gitlab/gitlab-runner:v19.5.0"
+    ],
+    "RepoDigests": [
+      "gitlab/gitlab-runner@sha256:f1c76f915d7f70d8b3e25cac58da3d87d3d10106dda82ee780409440e1dc1ccc"
+    ]
+  },
+  {
+    "Id": "sha256:e36e1e4eacd08173792dff27fefdb5427cd6938aeaeaf70585cf5cb8024d6211",
+    "RepoTags": [
+      "penpotapp/frontend:2.18.4"
+    ],
+    "RepoDigests": [
+      "penpotapp/frontend@sha256:e36e1e4eacd08173792dff27fefdb5427cd6938aeaeaf70585cf5cb8024d6211"
+    ]
+  },
+  {
+    "Id": "sha256:4a3821b66d5f1c473760911c3e445ff736d9b5274376e8f6ec8d0a3944df79a1",
+    "RepoTags": [
+      "penpotapp/backend:2.18.4"
+    ],
+    "RepoDigests": [
+      "penpotapp/backend@sha256:4a3821b66d5f1c473760911c3e445ff736d9b5274376e8f6ec8d0a3944df79a1"
+    ]
+  },
+  {
+    "Id": "sha256:3394056911fc35fd4738f21d6ffef5fbf07312418f3cb0e43dca4a3d04b9b8b2",
+    "RepoTags": [
+      "penpotapp/exporter:2.18.4"
+    ],
+    "RepoDigests": [
+      "penpotapp/exporter@sha256:3394056911fc35fd4738f21d6ffef5fbf07312418f3cb0e43dca4a3d04b9b8b2"
+    ]
+  },
+  {
+    "Id": "sha256:5935b5adbf33eb7abaabfab657fe8f5d465cac08e62e340f932ddb35ce0f311f",
+    "RepoTags": [
+      "penpotapp/admin-console:2.18.4"
+    ],
+    "RepoDigests": [
+      "penpotapp/admin-console@sha256:5935b5adbf33eb7abaabfab657fe8f5d465cac08e62e340f932ddb35ce0f311f"
+    ]
+  },
+  {
+    "Id": "sha256:1d6878c698affccfa1eef9944a2125b179f689ee04e51e5d3864be2ed747fae9",
+    "RepoTags": [
+      "penpotapp/mcp:2.18.4"
+    ],
+    "RepoDigests": [
+      "penpotapp/mcp@sha256:1d6878c698affccfa1eef9944a2125b179f689ee04e51e5d3864be2ed747fae9"
+    ]
+  },
+  {
+    "Id": "sha256:98fe06b500b5eb29e45bf8c073eb0ca399790ce17b1d586448edc4203627d342",
+    "RepoTags": [
+      "postgres:15.15"
+    ],
+    "RepoDigests": [
+      "postgres@sha256:98fe06b500b5eb29e45bf8c073eb0ca399790ce17b1d586448edc4203627d342"
+    ]
+  },
+  {
+    "Id": "sha256:81db6d39e1bba3b3ff32bd3a1b19a6d69690f94a3954ec131277b9a26b95b3aa",
+    "RepoTags": [
+      "valkey/valkey:8.1.4"
+    ],
+    "RepoDigests": [
+      "valkey/valkey@sha256:81db6d39e1bba3b3ff32bd3a1b19a6d69690f94a3954ec131277b9a26b95b3aa"
+    ]
+  },
+  {
+    "Id": "sha256:76f0358884cb92d9a086d24e5671c38048d3fef40f2588703d73eb55392d6b69",
+    "RepoTags": [
+      "mysql:8.4"
+    ],
+    "RepoDigests": [
+      "mysql@sha256:76f0358884cb92d9a086d24e5671c38048d3fef40f2588703d73eb55392d6b69"
+    ]
+  }
+]

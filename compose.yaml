@@ -1,0 +1,198 @@
+name: ai-dev-platform
+
+x-penpot-env: &penpot-env
+  PENPOT_PUBLIC_URI: http://localhost:9001
+  PENPOT_SECRET_KEY: ${PENPOT_SECRET_KEY:?required}
+  PENPOT_DATABASE_URI: postgresql://penpot-postgres/penpot
+  PENPOT_DATABASE_USERNAME: penpot
+  PENPOT_DATABASE_PASSWORD: ${PENPOT_DB_PASSWORD:?required}
+
+x-penpot-flags: &penpot-flags
+  PENPOT_FLAGS: disable-registration disable-email-verification disable-secure-session-cookies enable-login-with-password enable-prepl-server enable-mcp enable-admin-console disable-telemetry
+
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:19.5.1-ce.0
+    container_name: ai-dev-gitlab
+    hostname: gitlab
+    restart: unless-stopped
+    shm_size: 256m
+    mem_limit: 6g
+    environment:
+      GITLAB_ROOT_PASSWORD: ${GITLAB_ROOT_PASSWORD:?required}
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://localhost:8088'
+        nginx['listen_port'] = 8088
+        nginx['listen_https'] = false
+        gitlab_rails['gitlab_shell_ssh_port'] = 8022
+        gitlab_rails['time_zone'] = 'Asia/Shanghai'
+        gitlab_rails['gitlab_email_enabled'] = false
+        gitlab_rails['gitlab_signup_enabled'] = false
+        gitlab_rails['usage_ping_enabled'] = false
+        puma['worker_processes'] = 2
+        sidekiq['concurrency'] = 5
+        prometheus_monitoring['enable'] = false
+        alertmanager['enable'] = false
+        registry['enable'] = false
+        gitlab_pages['enable'] = false
+        letsencrypt['enable'] = false
+    ports:
+      - '127.0.0.1:8088:8088'
+      - '127.0.0.1:8022:22'
+    volumes:
+      - gitlab_config:/etc/gitlab
+      - gitlab_logs:/var/log/gitlab
+      - gitlab_data:/var/opt/gitlab
+    networks: [platform]
+
+  runner:
+    image: gitlab/gitlab-runner:v19.5.0
+    container_name: ai-dev-runner
+    restart: unless-stopped
+    mem_limit: 256m
+    volumes:
+      - runner_config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks: [platform]
+
+  penpot-frontend:
+    image: penpotapp/frontend:2.18.4
+    container_name: ai-dev-penpot-frontend
+    restart: unless-stopped
+    mem_limit: 512m
+    ports:
+      - '127.0.0.1:9001:8080'
+    volumes:
+      - penpot_assets:/opt/data/assets
+    environment:
+      <<: *penpot-flags
+      PENPOT_PUBLIC_URI: http://localhost:9001
+      PENPOT_ADMIN_CONSOLE_URI: http://penpot-admin-console:3000
+    depends_on: [penpot-backend, penpot-exporter, penpot-admin-console, penpot-mcp]
+    networks: [platform]
+
+  penpot-backend:
+    image: penpotapp/backend:2.18.4
+    container_name: ai-dev-penpot-backend
+    restart: unless-stopped
+    mem_limit: 2g
+    volumes:
+      - penpot_assets:/opt/data/assets
+    environment:
+      <<: [*penpot-env, *penpot-flags]
+      PENPOT_REDIS_URI: redis://penpot-valkey/0
+      PENPOT_ADMIN_CONSOLE_URI: http://penpot-admin-console:3000
+      PENPOT_OBJECTS_STORAGE_BACKEND: fs
+      PENPOT_OBJECTS_STORAGE_FS_DIRECTORY: /opt/data/assets
+      PENPOT_TELEMETRY_ENABLED: 'false'
+      JVM_OPTS: -Xms256m -Xmx1024m
+    depends_on:
+      penpot-postgres:
+        condition: service_healthy
+      penpot-valkey:
+        condition: service_healthy
+    networks: [platform]
+
+  penpot-admin-console:
+    image: penpotapp/admin-console:2.18.4
+    container_name: ai-dev-penpot-admin
+    restart: unless-stopped
+    mem_limit: 384m
+    environment:
+      <<: *penpot-env
+      PENPOT_INTERNAL_URI: http://penpot-frontend:8080
+    depends_on:
+      penpot-postgres:
+        condition: service_healthy
+    networks: [platform]
+
+  penpot-mcp:
+    image: penpotapp/mcp:2.18.4
+    container_name: ai-dev-penpot-mcp
+    restart: unless-stopped
+    mem_limit: 384m
+    networks: [platform]
+
+  penpot-exporter:
+    image: penpotapp/exporter:2.18.4
+    container_name: ai-dev-penpot-exporter
+    restart: unless-stopped
+    mem_limit: 1536m
+    environment:
+      <<: [*penpot-env, *penpot-flags]
+      PENPOT_INTERNAL_URI: http://penpot-frontend:8080
+      PENPOT_REDIS_URI: redis://penpot-valkey/0
+      PENPOT_EXPORTER_MAX_CONCURRENT_JOBS: '1'
+    depends_on:
+      penpot-valkey:
+        condition: service_healthy
+    networks: [platform]
+
+  penpot-postgres:
+    image: postgres:15.15
+    container_name: ai-dev-penpot-postgres
+    restart: unless-stopped
+    mem_limit: 512m
+    stop_signal: SIGINT
+    environment:
+      POSTGRES_INITDB_ARGS: --data-checksums
+      POSTGRES_DB: penpot
+      POSTGRES_USER: penpot
+      POSTGRES_PASSWORD: ${PENPOT_DB_PASSWORD:?required}
+    volumes:
+      - penpot_postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U penpot']
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    networks: [platform]
+
+  penpot-valkey:
+    image: valkey/valkey:8.1.4
+    container_name: ai-dev-penpot-valkey
+    restart: unless-stopped
+    mem_limit: 128m
+    command: ['valkey-server', '--maxmemory', '96mb', '--maxmemory-policy', 'allkeys-lru']
+    healthcheck:
+      test: ['CMD', 'valkey-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 12
+    networks: [platform]
+
+  demo-mysql:
+    image: mysql:8.4
+    container_name: ai-dev-demo-mysql
+    restart: unless-stopped
+    mem_limit: 768m
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--innodb-buffer-pool-size=128M']
+    ports:
+      - '127.0.0.1:3307:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?required}
+      MYSQL_DATABASE: ai_workflow
+      MYSQL_USER: ai_demo
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:?required}
+    volumes:
+      - demo_mysql:/var/lib/mysql
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 --silent']
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 30s
+    networks: [platform]
+
+networks:
+  platform:
+    name: ai-dev-platform-net
+
+volumes:
+  gitlab_config:
+  gitlab_logs:
+  gitlab_data:
+  runner_config:
+  penpot_assets:
+  penpot_postgres:
+  demo_mysql:

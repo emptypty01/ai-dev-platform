@@ -1,0 +1,6 @@
+{
+  "id": 1,
+  "web_url": "http://localhost:8088/developer/order-workflow-demo",
+  "path_with_namespace": "developer/order-workflow-demo",
+  "http_url_to_repo": "http://localhost:8088/developer/order-workflow-demo.git"
+}

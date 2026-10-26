@@ -1,0 +1,146 @@
+{
+  "pipelines": [
+    {
+      "id": 3,
+      "ref": "main",
+      "sha": "1ce990c790371d28b19266ff5a90daa97740bdce",
+      "status": "success",
+      "source": "push",
+      "web_url": "http://localhost:8088/developer/order-workflow-demo/-/pipelines/3",
+      "jobs": [
+        {
+          "id": 13,
+          "name": "deploy-local",
+          "stage": "deploy",
+          "status": "success",
+          "failure_reason": null,
+          "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/13"
+        },
+        {
+          "id": 12,
+          "name": "backend-package",
+          "stage": "build",
+          "status": "success",
+          "failure_reason": null,
+          "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/12"
+        },
+        {
+          "id": 11,
+          "name": "frontend-build",
+          "stage": "verify",
+          "status": "success",
+          "failure_reason": null,
+          "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/11"
+        },
+        {
+          "id": 10,
+          "name": "backend-targeted",
+          "stage": "verify",
+          "status": "success",
+          "failure_reason": null,
+          "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/10"
+        },
+        {
+          "id": 9,
+          "name": "handoff",
+          "stage": "handoff",
+          "status": "success",
+          "failure_reason": null,
+          "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/9"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "ref": "refs/merge-requests/1/head",
+      "sha": "91e9f99fee2cd134bc781ec086089d4ac4802a8b",
+      "status": "success",
+      "source": "merge_request_event",
+      "web_url": "http://localhost:8088/developer/order-workflow-demo/-/pipelines/2",
+      "jobs": [
+        {
+          "id": 8,
+          "name": "backend-package",
+          "stage": "build",
+          "status": "success",
+          "failure_reason": null,
+          "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/8"
+        },
+        {
+          "id": 7,
+          "name": "frontend-build",
+          "stage": "verify",
+          "status": "success",
+          "failure_reason": null,
+          "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/7"
+        },
+        {
+          "id": 6,
+          "name": "backend-targeted",
+          "stage": "verify",
+          "status": "success",
+          "failure_reason": null,
+          "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/6"
+        },
+        {
+          "id": 5,
+          "name": "handoff",
+          "stage": "handoff",
+          "status": "success",
+          "failure_reason": null,
+          "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/5"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "ref": "refs/merge-requests/1/head",
+      "sha": "82946037aef6f64902c7f5a832960d267e1a24f0",
+      "status": "canceled",
+      "source": "merge_request_event",
+      "web_url": "http://localhost:8088/developer/order-workflow-demo/-/pipelines/1",
+      "jobs": [
+        {
+          "id": 4,
+          "name": "backend-package",
+          "stage": "build",
+          "status": "canceled",
+          "failure_reason": null,
+          "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/4"
+        },
+        {
+          "id": 3,
+          "name": "frontend-build",
+          "stage": "verify",
+          "status": "canceled",
+          "failure_reason": null,
+          "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/3"
+        },
+        {
+          "id": 2,
+          "name": "backend-targeted",
+          "stage": "verify",
+          "status": "success",
+          "failure_reason": null,
+          "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/2"
+        },
+        {
+          "id": 1,
+          "name": "handoff",
+          "stage": "handoff",
+          "status": "success",
+          "failure_reason": null,
+          "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/1"
+        }
+      ]
+    }
+  ],
+  "mr": {
+    "iid": 1,
+    "state": "merged",
+    "sha": "91e9f99fee2cd134bc781ec086089d4ac4802a8b",
+    "detailed_merge_status": "not_open",
+    "web_url": "http://localhost:8088/developer/order-workflow-demo/-/merge_requests/1",
+    "merge_commit_sha": "1ce990c790371d28b19266ff5a90daa97740bdce"
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "id": 1,
+  "iid": 1,
+  "project_id": 1,
+  "title": "实现订单管理示例及本地 AI 研发 CI/CD 流程",
+  "description": "## 问题与行为变化\n\n关联 Issue #1。提供 Java 21 + Spring Boot + MySQL 订单创建、列表和幂等取消，以及 Vue 3 + Vite 页面和本地 CI/CD。\n\n## 验收项覆盖\n\n| 验收项 | 实现与证据 | 当前结论 |\n| --- | --- | --- |\n| AC-01 | 后端 BigDecimal 计算、订单号与 NEW 状态 | 本地定向验证通过 |\n| AC-02 | 最近 100 笔列表、前端状态筛选 | 浏览器验证通过 |\n| AC-03 | 名称、数量及金额边界返回 400 | 定向测试与 API 验证通过 |\n| AC-04 | 行锁保护取消、8 路并发与重复调用、404 | 真实 MySQL 验证通过 |\n| AC-05 | 独立持久化卷、应用重建后数据保留 | 本地重建与备份恢复通过 |\n| AC-06 | MR 定向测试与构建，main 受保护分支手工发布 | 本 MR 真实流水线验证中 |\n\n## 变更与迁移影响\n\n新增 demo_order 表，DDL 为 backend/src/main/resources/db/migration/V1__create_demo_order.sql，Flyway 管理。新表初始化；不改 UniBMS 数据库。接口契约 contracts/openapi.yaml。\n\n## 实际验证\n\n本地 OrderServiceTest 7 个用例通过；API 10 项场景（含 8 路并发取消）、Vue 构建、浏览器创建与取消通过。真实 GitLab Pipeline 由本 MR 产生，未完成前不计为通过。\n\n过程测试主文档：D:\\plan&exec&test\\20261024-AI研发流程本地平台\\03-测试文档.md；日志在同目录 log/。\n\n## 发布与回滚\n\n默认分支通过后手工执行 deploy-local，使用 commit SHA 镜像，环境 http://localhost:5174。回滚使用保留的旧镜像；数据库迁移需单独核对，不自动撤销。\n\n## 授权与未执行项\n\n用户已明确授权本次新建示例仓库的初始化/演示提交与推送、MR 检查通过后合并及 localhost 发布。未执行全量回归、生产发布和业务负责人验收。Issue 不由 MR 自动关闭。",
+  "state": "opened",
+  "created_at": "2026-10-24T13:50:27.089+08:00",
+  "updated_at": "2026-10-24T13:50:27.211+08:00",
+  "merged_by": null,
+  "merge_user": null,
+  "merged_at": null,
+  "closed_by": null,
+  "closed_at": null,
+  "target_branch": "main",
+  "source_branch": "feat/1-order-workflow",
+  "user_notes_count": 0,
+  "upvotes": 0,
+  "downvotes": 0,
+  "author": {
+    "id": 2,
+    "username": "developer",
+    "public_email": null,
+    "name": "本地研发示例",
+    "state": "active",
+    "locked": false,
+    "avatar_url": "https://www.gravatar.com/avatar/61e825223fad6c5e758c35f02b29abe1ddb080dd95c7b0c99c9b79896efcd4e6?s=80&d=identicon",
+    "web_url": "http://localhost:8088/developer",
+    "bot": false
+  },
+  "assignees": [
+    {
+      "id": 2,
+      "username": "developer",
+      "public_email": null,
+      "name": "本地研发示例",
+      "state": "active",
+      "locked": false,
+      "avatar_url": "https://www.gravatar.com/avatar/61e825223fad6c5e758c35f02b29abe1ddb080dd95c7b0c99c9b79896efcd4e6?s=80&d=identicon",
+      "web_url": "http://localhost:8088/developer"
+    }
+  ],
+  "assignee": {
+    "id": 2,
+    "username": "developer",
+    "public_email": null,
+    "name": "本地研发示例",
+    "state": "active",
+    "locked": false,
+    "avatar_url": "https://www.gravatar.com/avatar/61e825223fad6c5e758c35f02b29abe1ddb080dd95c7b0c99c9b79896efcd4e6?s=80&d=identicon",
+    "web_url": "http://localhost:8088/developer"
+  },
+  "reviewers": [
+    {
+      "id": 1,
+      "username": "root",
+      "public_email": null,
+      "name": "Administrator",
+      "state": "active",
+      "locked": false,
+      "avatar_url": "https://www.gravatar.com/avatar/c8984ea606dbbd00ba91283a6f7cae9c42f98cfd81657ac80fd4f79963960fa8?s=80&d=identicon",
+      "web_url": "http://localhost:8088/root"
+    }
+  ],
+  "source_project_id": 1,
+  "target_project_id": 1,
+  "labels": [
+    "flow/review",
+    "type/feature"
+  ],
+  "draft": false,
+  "imported": false,
+  "imported_from": "none",
+  "work_in_progress": false,
+  "milestone": null,
+  "merge_when_pipeline_succeeds": false,
+  "merge_status": "checking",
+  "detailed_merge_status": "preparing",
+  "merge_after": null,
+  "sha": "82946037aef6f64902c7f5a832960d267e1a24f0",
+  "merge_commit_sha": null,
+  "squash_commit_sha": null,
+  "discussion_locked": null,
+  "should_remove_source_branch": null,
+  "force_remove_source_branch": false,
+  "prepared_at": null,
+  "reference": "!1",
+  "references": {
+    "short": "!1",
+    "relative": "!1",
+    "full": "developer/order-workflow-demo!1"
+  },
+  "web_url": "http://localhost:8088/developer/order-workflow-demo/-/merge_requests/1",
+  "time_stats": {
+    "time_estimate": 0,
+    "total_time_spent": 0,
+    "human_time_estimate": null,
+    "human_total_time_spent": null
+  },
+  "squash": false,
+  "squash_on_merge": false,
+  "task_completion_status": {
+    "count": 0,
+    "completed_count": 0
+  },
+  "has_conflicts": false,
+  "blocking_discussions_resolved": true,
+  "subscribed": true,
+  "changes_count": null,
+  "latest_build_started_at": null,
+  "latest_build_finished_at": null,
+  "first_deployed_to_production_at": null,
+  "pipeline": null,
+  "head_pipeline": null,
+  "diff_refs": null,
+  "merge_error": null,
+  "user": {
+    "can_merge": true
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "pipeline_id": 3,
+  "sha": "1ce990c790371d28b19266ff5a90daa97740bdce",
+  "job": {
+    "id": 13,
+    "status": "waiting_for_resource",
+    "stage": "deploy",
+    "name": "deploy-local",
+    "ref": "main",
+    "tag": false,
+    "coverage": null,
+    "allow_failure": false,
+    "created_at": "2026-10-24T13:58:56.999+08:00",
+    "started_at": null,
+    "finished_at": null,
+    "erased_at": null,
+    "duration": null,
+    "queued_duration": null,
+    "user": {
+      "id": 2,
+      "username": "developer",
+      "public_email": null,
+      "name": "本地研发示例",
+      "state": "active",
+      "locked": false,
+      "avatar_url": "https://www.gravatar.com/avatar/61e825223fad6c5e758c35f02b29abe1ddb080dd95c7b0c99c9b79896efcd4e6?s=80&d=identicon",
+      "web_url": "http://localhost:8088/developer",
+      "created_at": "2026-10-24T11:47:00.981+08:00",
+      "bio": "",
+      "location": "",
+      "linkedin": "",
+      "twitter": "",
+      "discord": "",
+      "website_url": "",
+      "github": "",
+      "job_title": "",
+      "pronouns": null,
+      "organization": "",
+      "bot": false,
+      "work_information": null,
+      "followers": 0,
+      "following": 0,
+      "local_time": null
+    },
+    "commit": {
+      "id": "1ce990c790371d28b19266ff5a90daa97740bdce",
+      "short_id": "1ce990c7",
+      "created_at": "2026-10-24T13:58:55.000+08:00",
+      "parent_ids": [
+        "3f1100c83f763824503449f99488959a002e0bde",
+        "91e9f99fee2cd134bc781ec086089d4ac4802a8b"
+      ],
+      "title": "Merge branch 'feat/1-order-workflow' into 'main'",
+      "message": "Merge branch 'feat/1-order-workflow' into 'main'\n\n实现订单管理示例及本地 AI 研发 CI/CD 流程 (#1)",
+      "author_name": "本地研发示例",
+      "author_email": "developer@local.test",
+      "authored_date": "2026-10-24T13:58:55.000+08:00",
+      "committer_name": "本地研发示例",
+      "committer_email": "developer@local.test",
+      "committed_date": "2026-10-24T13:58:55.000+08:00",
+      "trailers": {},
+      "extended_trailers": {},
+      "web_url": "http://localhost:8088/developer/order-workflow-demo/-/commit/1ce990c790371d28b19266ff5a90daa97740bdce"
+    },
+    "pipeline": {
+      "id": 3,
+      "iid": 3,
+      "project_id": 1,
+      "sha": "1ce990c790371d28b19266ff5a90daa97740bdce",
+      "ref": "main",
+      "status": "manual",
+      "source": "push",
+      "created_at": "2026-10-24T13:58:56.974+08:00",
+      "updated_at": "2026-10-24T13:59:51.141+08:00",
+      "web_url": "http://localhost:8088/developer/order-workflow-demo/-/pipelines/3"
+    },
+    "web_url": "http://localhost:8088/developer/order-workflow-demo/-/jobs/13",
+    "project": {
+      "ci_job_token_scope_enabled": false
+    },
+    "artifacts": [],
+    "runner": null,
+    "runner_manager": null,
+    "artifacts_expire_at": null,
+    "archived": false,
+    "tag_list": [
+      "local-deploy"
+    ]
+  }
+}
